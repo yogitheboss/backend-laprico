@@ -76,13 +76,14 @@ def get_top_laptops(df):
 
 def master_filter(df,input_values):
     values = [v.strip().lower() for v in input_values]
-    print( "values", values[0], values[1], values[2])
+    print( "values", values[0], values[1], values[2], values[3])
     filtered_df = df.copy() 
 
     # Apply filters based on user input
     filtered_df = filter_price(filtered_df, values[0])
-    filtered_df = filter_brand(filtered_df, values[1])
-    filtered_df = filter_usecase(filtered_df, values[2])
+    filtered_df = filter_usecase(filtered_df, values[1])
+    filtered_df = filter_os(filtered_df, values[2])
+    filtered_df = filter_brand(filtered_df, values[3])
     # filtered_df = filter_os(filtered_df, values[3])
 
     return filtered_df
@@ -94,6 +95,7 @@ df = pd.read_csv("Laptop_Dataset_completed.csv")
 
 def get_top_laptops_api():
     try:
+     
         input_values = request.json.get('input_values')
         print(input_values)
         result_df_master = master_filter(df, input_values)
